@@ -6,14 +6,8 @@ import backgroundImg from "./assets/images/background.jpg";
 
 import toursImg from "./assets/images/tours.png";
 import kitImg from "./assets/images/kit.png";
-import bulbImg from "./assets/images/bulb.png";
-import digesterImg from "./assets/images/digester.png";
-import stabilizerImg from "./assets/images/stabilizer.png";
-import emotionImg from "./assets/images/emotion.png";
-import humorImg from "./assets/images/humor.png";
-import kb808Img from "./assets/images/kb808.png";
-import tauntImg from "./assets/images/taunt.png";
-import furnaceImg from "./assets/images/furnace.png";
+import rarePartsImg from "./assets/images/rareParts.png";
+import commonPartsImg from "./assets/images/commonParts.png";
 import fabricatorSpecImg from "./assets/images/fabricator.png";
 import fabricatorProfImg from "./assets/images/fabricatorProf.png";
 
@@ -36,9 +30,9 @@ import aussie16Img from "./assets/images/aussie16.png";
 import aussie17Img from "./assets/images/aussie17.png";
 import aussie18Img from "./assets/images/aussie18.png";
 import aussie19Img from "./assets/images/aussie19.png";
+import aussie20Img from "./assets/images/aussie20.png";
 
-import weaponsImg from "./assets/images/weapons.png";
-import hatsImg from "./assets/images/hats.png";
+import randomDropsImg from "./assets/images/randomDrops.png";
 
 const STORAGE_KEY = "mvm_manifestos_v1";
 const TOUR_STORAGE_KEY = "mvm_tour_v1";
@@ -69,23 +63,17 @@ const AUSSIE_VARIANTS = [
   { key: "aussie17", src: aussie17Img },
   { key: "aussie18", src: aussie18Img },
   { key: "aussie19", src: aussie19Img },
+  { key: "aussie20", src: aussie20Img },
 ];
 
 const ICONS = {
   tours: toursImg,
   kit: kitImg,
-  bulb: bulbImg,
-  digester: digesterImg,
-  stabilizer: stabilizerImg,
-  emotion: emotionImg,
-  humor: humorImg,
-  kb808: kb808Img,
-  taunt: tauntImg,
-  furnace: furnaceImg,
+  rareParts: rarePartsImg,
+  commonParts: commonPartsImg,
   fabricatorSpec: fabricatorSpecImg,
   fabricatorProf: fabricatorProfImg,
-  weapons: weaponsImg,
-  hats: hatsImg,
+  randomDrops: randomDropsImg,
 };
 
 // Order and display names of the drops.
@@ -99,16 +87,9 @@ const DROP_DEFS = [
   { key: "fabricatorProf", label: "Professional Fabricator", max: 1 },
   { key: "fabricatorSpec", label: "Specialized Fabricator", min: 1 },
   { key: "kit", label: "Killstreak Kit", fixed: 1 },
-  { key: "bulb", label: "Pristine Robot Brainstorm Bulb", bigStep: true },
-  { key: "digester", label: "Pristine Robot Currency Digester", bigStep: true },
-  { key: "stabilizer", label: "Reinforced Robot Bomb Stabilizer", bigStep: true },
-  { key: "emotion", label: "Reinforced Robot Emotion Detector", bigStep: true },
-  { key: "humor", label: "Reinforced Robot Humor Suppression Pump", bigStep: true },
-  { key: "kb808", label: "Battle-Worn Robot KB-808", bigStep: true },
-  { key: "taunt", label: "Battle-Worn Robot Taunt Processor", bigStep: true },
-  { key: "furnace", label: "Battle-Worn Robot Money Furnace", bigStep: true },
-  { key: "weapons", label: "Weapons" },
-  { key: "hats", label: "Hats" },
+  { key: "rareParts", label: "Rare Parts", bigStep: true },
+  { key: "commonParts", label: "Common Parts", bigStep: true, min: 20 },
+  { key: "randomDrops", label: "Random Drops", bigStep: true },
 ];
 
 // --- helpers ---------------------------------------------------------
@@ -575,7 +556,7 @@ export default function OperationsLedger() {
         <div className="rl-drops-block">
           <span className="rl-drops-title">Drops</span>
           <div className="rl-drops-grid">
-            {DROP_DEFS.map((d) => (
+            {DROP_DEFS.filter((d) => d.key !== "kit").map((d) => (
               <DropCounter
                 key={d.key}
                 icon={iconFor(d.key)}
